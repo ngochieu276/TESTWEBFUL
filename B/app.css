@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#main {
+  padding: 20px 10px;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Question {
+  margin: 10px 20px;
+  display: flex;
+}
+.Question-title {
+  font-size: 2rem;
+  color: red;
+}

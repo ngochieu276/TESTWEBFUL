@@ -1,50 +1,33 @@
-import * as model from "./model.js";
+import { state, getData } from "./helpFunc.js";
 const main = document.querySelector(".main");
 
-const dataRender = async () => {
-  await model.getData();
-  console.log(model.state.results);
+const showData = async () => {
+  await getData();
 
-  model.state.results.map((data) => {
+  state.results.map((rel) => {
     const markup = `
-   <h2>Questions ${data.id}</h2>
-   <p>Category: ${data.category}</p>
-   <p>Type: ${data.type}</p>
-   <p>Difficulty: ${data.difficulty}</p>
-   <p>Question: ${data.question}</p>
+    <div class="Question>
+   <h2 class="Question-title">Questions ${rel.id}</h2>
+   <p class="Category">Category: ${rel.category}</p>
+   <p class="Type">Type: ${rel.type}</p>
+   <p>Difficulty: ${rel.difficulty}</p>
+   <p>Question: ${rel.question}</p>
    <form class="choose">
-    ${data.incorrectAnswer.map((each) => {
+    ${rel.incorrectAnswer.map((each) => {
       return `
      <input class="btn-quiz" type="radio" name="question_01" value="false"> ${each}<br>
      `;
     })}
     <input class="btn-quiz" type="radio" name="question_01" value="true"> ${
-      data.correctAnswer
+      rel.correctAnswer
     }<br>
    </form>
-   <p>Correct Answer: ${data.correctAnswer}</p>
-   <p>Incorect Answer: ${data.incorrectAnswer}</p>
+   <p>Correct Answer: ${rel.correctAnswer}</p>
+   <p>Incorect Answer: ${rel.incorrectAnswer}</p>
+   </div>
    `;
     main.insertAdjacentHTML("afterbegin", markup);
   });
-
-  const controlQuiz = () => {
-    main.addEventListener("click", function (e) {
-      const btn = e.target.closest(".btn-quiz");
-      console.log(btn);
-      if (!btn) return;
-      if (btn.value === "false") {
-        alert("wrong");
-      }
-      if (btn.value === "true") {
-        alert("bingo, +10");
-      }
-    });
-    controlQuiz();
-  };
 };
 
-const init = () => {
-  dataRender();
-};
-init();
+showData();
